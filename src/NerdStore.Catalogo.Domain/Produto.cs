@@ -1,16 +1,19 @@
-﻿using NerdStore.Core;
+﻿using Microsoft.VisualBasic;
+using NerdStore.Core;
 using NerdStore.Core.DomainObjects;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NerdStore.Catalogo.Domain
 {
     public class Produto : Entity, IAggregateRoot
     {
-        public Categoria CategoriaId { get; private set; }
+        public Guid CategoriaId { get; private set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public bool Ativo { get; private set; }
@@ -19,5 +22,46 @@ namespace NerdStore.Catalogo.Domain
         public string Imagem { get; private set; }
         public int QuantidadeEstoque { get; private set; }
         public Categoria Categoria { get; private set; }
+
+        public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem)
+        {
+            CategoriaId = categoriaId;
+            Nome = nome;
+            Descricao = descricao;
+            Ativo = ativo;
+            Valor = valor;
+            DataCadastro = dataCadastro;
+            Imagem = imagem;
+        }
+
+        //AdHoock Setters
+        public void Ativar() => Ativo = true;
+        public void Desativar() => Ativo = false;
+        public void AlterarDescricao(string descricao)
+        {
+            Descricao = descricao;
+        }
+        public void DebitarEstoque(int quantidade)
+        {
+            if (quantidade < 0) quantidade *= -1;
+            QuantidadeEstoque -= quantidade;
+        }
+        public void ReporEstoque(int quantidade)
+        {
+            QuantidadeEstoque += quantidade;
+        }
+        public bool PossuiEstoque(int quantidade)
+        {
+            return QuantidadeEstoque >= quantidade;
+        }
+        public void AlterarCategoria(Categoria categoria)
+        {
+            Categoria = categoria;
+            CategoriaId = categoria.Id;
+        }
+        public void Validar()
+        {
+
+        }
     }
 }
