@@ -26,8 +26,4 @@
     <ProjectReference Include="..\NerdStore.Core\NerdStore.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Setup\" />
-  </ItemGroup>
-
 </Project>
