@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\VitrineController.cs~RFa29e3f.TMP" />
     <None Remove="Views\AdminProdutos\NovoProduto.cshtml~RF8d23e5.TMP" />
   </ItemGroup>
 
